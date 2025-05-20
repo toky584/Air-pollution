@@ -37,9 +37,9 @@ The mean parameter $\mu_i$ is modeled as:
 - $\beta_0 \sim \text{Normal}(0, 2)$ is the intercept.
 - $f \sim \text{GP}(0, k)$ is a Gaussian Process capturing non-parametric time effects. A squared exponential kernel is approximated using a Hilbert Space basis function expansion (HSGP).
 - Priors for GP hyperparameters (marginal standard deviation \(\alpha\), lengthscale \(\rho\)) and observation noise \(\sigma\) are specified as:
-    - \(\alpha \sim \text{Half-Cauchy}(0, 1)\)
-    - \(\rho \sim \text{Inverse-Gamma}(5, 1)\)
-    - \(\sigma \sim \text{Half-Cauchy}(0, 1)\)
+    - $\alpha \sim \text{Half-Cauchy}(0, 1)$
+    - $\rho \sim \text{Inverse-Gamma}(5, 1)$
+    - $\sigma \sim \text{Half-Cauchy}(0, 1)$
 
 The model is implemented in Stan and fitted using CmdStanPy.
 
