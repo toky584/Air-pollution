@@ -118,7 +118,6 @@ For the "Buwate" site:
 - Based on the posterior median predictions for the *observed data points*, an estimated **X** days (from script output) had PM2.5 concentrations above 35 µg/m³.
 - Extrapolating this, approximately **Y** days (from script output) in a full year might experience unhealthy PM2.5 levels at this site.
 
-*(Note: X and Y will be filled by running `main.py`)*
 
 ## Conclusion
 
