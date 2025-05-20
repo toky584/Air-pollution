@@ -30,12 +30,12 @@ The WHO provides guidelines for PM2.5 levels:
 
 ### 2. Gaussian Process Model (HSGP)
 A Log-Normal observation model is used for PM2.5 concentrations:
-- \(y_i \sim \text{LogNormal}(\mu_i, \sigma^2)\)
-Where \(y_i\) is the PM2.5 concentration at observation \(i\).
-The mean parameter \(\mu_i\) is modeled as:
-- \(\mu_i = \beta_0 + f(\text{date}_i)\)
-- \(\beta_0 \sim \text{Normal}(0, 2)\) is the intercept.
-- \(f \sim \text{GP}(0, k)\) is a Gaussian Process capturing non-parametric time effects. A squared exponential kernel is approximated using a Hilbert Space basis function expansion (HSGP).
+- $y_i \sim \text{LogNormal}(\mu_i, \sigma^2)$
+Where $y_i$ is the PM2.5 concentration at observation $i$.
+The mean parameter $\mu_i$ is modeled as:
+- $\mu_i = \beta_0 + f(\text{date}_i)$
+- $\beta_0 \sim \text{Normal}(0, 2)$ is the intercept.
+- $f \sim \text{GP}(0, k)$ is a Gaussian Process capturing non-parametric time effects. A squared exponential kernel is approximated using a Hilbert Space basis function expansion (HSGP).
 - Priors for GP hyperparameters (marginal standard deviation \(\alpha\), lengthscale \(\rho\)) and observation noise \(\sigma\) are specified as:
     - \(\alpha \sim \text{Half-Cauchy}(0, 1)\)
     - \(\rho \sim \text{Inverse-Gamma}(5, 1)\)
@@ -46,19 +46,16 @@ The model is implemented in Stan and fitted using CmdStanPy.
 ## Repository Structure
 
 ```
-pm25-hsgp-kampala/
-├── .gitignore
+Air-pollution/
 ├── README.md
 ├── requirements.txt
-├── stan_models/
-│   └── hsgp_se_model.stan  # Stan model code
+├── stan-model/
+│   └── hsgp-model.stan  # Stan model code
 ├── src/
 │   ├── main.py             # Main Python script for analysis
 │   └── utilities.py        # Utility functions (e.g., for CmdStan installation)
 └── plots/                  # Generated plots
-    ├── kampala_sites_map.html
     ├── pm25_buwate_kyebando_eda.png
-    ├── model_trace_plots.png
     └── posterior_pm25_buwate.png
 ```
 
@@ -110,12 +107,6 @@ pm25-hsgp-kampala/
 ![PM2.5 EDA Plot](plots/pm25_buwate_kyebando_eda.png)
 *This plot shows the raw PM2.5 measurements for two sites in Kampala, overlaid with WHO air quality guideline bands.*
 
-### Model Diagnostics (for Buwate site)
-
-**Trace Plots:**
-![Model Trace Plots](plots/model_trace_plots.png)
-*Trace plots for key model parameters (\(\beta_0\), \(\alpha\), \(\rho\), \(\sigma\)). These help assess MCMC convergence and mixing. Some divergences were noted, indicating potential areas for model refinement.*
-
 ### Posterior Predictions (for Buwate site)
 
 **PM2.5 Posterior Prediction:**
@@ -129,22 +120,6 @@ For the "Buwate" site:
 
 *(Note: X and Y will be filled by running `main.py`)*
 
-## Discussion & Conclusion
+## Conclusion
 
 The HSGP model provides a flexible way to capture the temporal dynamics of PM2.5 concentrations. The analysis for the "Buwate" site in Kampala suggests a non-negligible number of days with unhealthy air quality, posing a potential public health risk.
-
-**Limitations & Future Work:**
-- The MCMC sampling exhibited some divergences, suggesting that the model could be improved, possibly through reparameterization, different kernel choices (e.g., Matérn), or more informative priors for certain parameters.
-- The estimation of unhealthy days for a full year was based on extrapolating from observed data points. A more robust approach would involve modifying the Stan model's `generated quantities` block to make predictions for all days in a year, including those without observations.
-- Spatial effects between sites were not modeled. A spatio-temporal GP could provide a more comprehensive understanding.
-- Analysis could be extended to other sites in Kampala or other cities.
-
-## Authors (from OCR)
-- Ando Harilala Daniel Rakotondrasoa
-- Lahatra Fitiavana Harinasandratra
-- Maharavo Rakotonirainy
-- Onintsoa Anjara Rakotondranisa
-- Toky Iriana Rajaofera
-- Hlonipha Sikota (external) `hloniphalisa@gmail.com`
-- Bester Saruchera (external) `Sarucherab@ukzn.ac.za`
-*(This project appears to be based on their work/instructions.)*
