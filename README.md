@@ -100,17 +100,16 @@ Air-pollution/
 
 ### Exploratory Data Analysis
 
-**Kampala Measurement Sites:**
-(The interactive map `kampala_sites_map.html` is generated in `plots/`)
-
 **PM2.5 Time Series for Selected Sites (Buwate & Kyebando):**
 ![PM2.5 EDA Plot](plots/pm25_buwate_kyebando_eda.png)
+
 *This plot shows the raw PM2.5 measurements for two sites in Kampala, overlaid with WHO air quality guideline bands.*
 
 ### Posterior Predictions (for Buwate site)
 
 **PM2.5 Posterior Prediction:**
 ![Posterior PM2.5 Prediction for Buwate](plots/posterior_pm25_buwate.png)
+
 *This plot shows the observed PM2.5 data points, the posterior median prediction from the GP model, and the 95% credible interval.*
 
 ### Main Objective: Unhealthy Days
